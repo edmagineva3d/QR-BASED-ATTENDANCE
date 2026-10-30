@@ -210,6 +210,7 @@ export const AttendanceList: React.FC<AttendanceListProps> = ({
                   <th>Student ID</th>
                   <th>Student Name</th>
                   <th>Course &amp; Year</th>
+                  <th>Class / Session</th>
                   <th>Date</th>
                   <th>Time</th>
                   <th>Status</th>
@@ -236,6 +237,9 @@ export const AttendanceList: React.FC<AttendanceListProps> = ({
                         </div>
                       </td>
                       <td>
+                        <div className="text-sm">{record.sessionLabel || 'Daily attendance'}</div>
+                      </td>
+                      <td>
                         <div className="date-cell">
                           <Calendar size={13} className="text-muted" />
                           <span>{formatDisplayDate(record.date)}</span>
@@ -248,7 +252,7 @@ export const AttendanceList: React.FC<AttendanceListProps> = ({
                         </div>
                       </td>
                       <td>
-                        <span className="badge badge-success">
+                        <span className={`badge ${record.status === 'Late' ? 'badge-warning' : 'badge-success'}`}>
                           <span className="status-dot"></span>
                           {record.status}
                         </span>
