@@ -18,3 +18,7 @@ Create a dated session and select it as the active session. Scans are separated 
 ## 5. Class Schedules
 
 Save the class day, start time, and end time. The schedule list is stored in the browser.
+
+## 6. Attendance Reports
+
+Choose a date range and section to view attendance records, then export the filtered records as CSV.
