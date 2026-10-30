@@ -13,93 +13,51 @@
   <strong>QR Code Attendance System</strong> is a frontend-only student attendance management application built with <strong>React, TypeScript, and Vite</strong>. It allows administrators and teachers to register students, generate QR codes, scan attendance using a device camera, manage classes and attendance sessions, and generate attendance reports. The application uses browser-based localStorage to save student information, attendance records, and management data without requiring a backend server or external database.
 </p>
 
-✨ Features
+## ✨ Features
+- 👨‍🎓 Register students with full name, student ID, course, and year level
+- 🔍 Validate student IDs to prevent duplicate registrations
+- 📱 Generate real, scannable QR codes for registered students
+- 🪪 View interactive Student Attendance Pass / ID Badge
+- 📥 Download student QR codes as PNG images
+- 🖨️ Print student attendance passes with print-friendly styling
+- 📷 Scan QR codes using the device's webcam or camera
+- 🎥 Select available cameras, including front and back cameras
+- 🔦 Animated scanner laser and camera viewfinder
+- 📂 Scan QR code images using the File Scan feature
+- ⚡ Use the Quick-Test Bar to test registered students without a physical camera
+- 🔊 Play audio feedback for successful, duplicate, and invalid scans
+- ✅ Automatically match scanned QR codes with registered students
+- 🚫 Prevent duplicate attendance entries within the same day or active session
+- ⚠️ Display alerts for invalid or unregistered student QR codes
+- 🕒 Display student details, attendance date, time, and status
+- 📡 Show Today's Live Scan Feed with real-time student check-ins
+- 📋 View complete attendance records through the Attendance List
+- 📊 Export attendance records to CSV
+- 🧹 Clear attendance records with a confirmation dialog
+- 🔐 Support Teacher/Admin sign-in with role-based management controls
+- 👥 Manage teachers, administrators, classes, and sections
+- 📅 Create and manage dated attendance sessions
+- 🗓️ Set class schedules with selected days and times
+- 🎯 Select an active attendance session for QR scanning
+- 📈 Filter attendance reports by date range and section
+- 💾 Download and restore application data using JSON backups
+- 📝 Maintain a local audit trail for scans and selected management activities
+- 🌙 Switch between Light Mode and Dark Mode
+- 📱 Support responsive layouts for different screen sizes
+- ✨ Include animated interface elements and interactive components
 
-👨‍🎓 Register students with full name, student ID, course, and year level
-
-🔍 Validate student IDs to prevent duplicate student registrations
-
-📱 Generate real, scannable QR codes for registered students
-
-🪪 View interactive Student Attendance Pass / ID Badge
-
-📥 Download student QR codes as PNG images
-
-🖨️ Print student attendance passes with print-friendly styling
-
-📷 Scan QR codes using the device's webcam or camera
-
-🎥 Select available cameras, including front and back cameras
-
-🔦 Animated scanner laser and camera viewfinder
-
-📂 Scan QR code images directly using the File Scan feature
-
-⚡ Quick-Test Bar for testing registered students without a physical camera
-
-🔊 Audio feedback for successful, duplicate, and invalid scans
-
-✅ Automatically match scanned QR codes with registered students
-
-🚫 Prevent duplicate attendance entries within the same day or active session, depending on the attendance workflow
-
-⚠️ Display alerts for invalid or unregistered student QR codes
-
-🕒 Display student details, attendance date, time, and status
-
-📡 Show Today's Live Scan Feed with real-time student check-ins
-
-📋 View complete attendance records through the Attendance List
-
-📊 Export attendance records to CSV
-
-🧹 Clear attendance records with a confirmation dialog
-
-🔐 Teacher/Admin sign-in with role-based management controls
-
-👥 Manage teachers, administrators, classes, and sections
-
-📅 Create and manage dated attendance sessions
-
-🗓️ Set class schedules with selected days and times
-
-🎯 Select an active attendance session for QR scanning
-
-📈 Filter attendance reports by date range and section
-
-💾 Download and restore application data using JSON backups
-
-📝 Maintain a local audit trail for scans and selected management activities
-
-🌙 Light Mode and Dark Mode interface
-
-📱 Responsive layout for different screen sizes
-
-✨ Animated interface elements and interactive components
-
-🛠️ Technologies Used
-
-⚛️ React 19
-
-📘 TypeScript
-
-⚡ Vite
-
-📷 HTML5 QR Code (html5-qrcode)
-
-🔳 QR Code Generator (qrcode.react)
-
-🎨 CSS (global, responsive, and animation styles)
-
-🎭 Lucide React (lucide-react) for icons
-
-🔊 Web Audio API for scanner sound effects
-
-💾 Browser localStorage for data persistence
-
-📄 CSV export for attendance reports
-
-📦 JSON for application backup and restore
+## 🛠️ Technologies Used
+- ⚛️ React 19
+- 📘 TypeScript
+- ⚡ Vite
+- 📷 HTML5 QR Code (`html5-qrcode`)
+- 🔳 QR Code Generator (`qrcode.react`)
+- 🎨 CSS (global, responsive, and animation styles)
+- 🎭 Lucide React (`lucide-react`) for icons
+- 🔊 Web Audio API for scanner sound effects
+- 💾 Browser localStorage for data persistence
+- 📄 CSV export for attendance reports
+- 📦 JSON for application backup and restore
 
 ---
 
