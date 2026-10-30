@@ -2117,3 +2117,27 @@
     transition: none;
   }
 }
+
+/* Added management and local demo sign-in */
+.login-screen{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--bg-main)}
+.login-card{width:min(100%,420px);display:flex;flex-direction:column;gap:14px;padding:32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);color:var(--text-main)}
+.login-card .brand-logo-circle{display:grid;place-items:center;width:52px;height:52px;border-radius:16px;background:var(--primary-soft);color:var(--primary)}
+.login-card h1{font-size:1.45rem}.login-card p,.login-card small{color:var(--text-muted)}
+.login-card label{display:grid;gap:6px;font-size:.9rem;font-weight:600}
+.login-card .btn{justify-content:center;padding:11px}
+.login-demo{display:grid;gap:4px;padding:12px;background:var(--bg-main);border:1px solid var(--border);border-radius:var(--radius-md);font-size:.85rem}
+.login-error{color:var(--error)!important;font-weight:600}
+.management-card{overflow:hidden}
+.management-tabs{display:flex;flex-wrap:wrap;gap:8px;padding:14px 20px;border-bottom:1px solid var(--border)}
+.management-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.management-grid .stat-card{display:flex;align-items:center;gap:12px;padding:16px;background:var(--bg-main);border:1px solid var(--border);border-radius:var(--radius-md)}
+.management-grid .stat-card svg{color:var(--primary)}
+.management-stack{display:grid;gap:12px}
+.management-form{display:flex;flex-wrap:wrap;align-items:end;gap:10px;padding:14px;background:var(--bg-main);border:1px solid var(--border);border-radius:var(--radius-md)}
+.management-form>*{flex:1;min-width:140px}
+.management-form label{display:grid;gap:5px;font-size:.85rem;font-weight:600}
+.management-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 4px;border-bottom:1px solid var(--border)}
+.management-row span{display:grid;gap:3px}.management-row small{color:var(--text-muted)}
+.management-note,.management-message{padding:12px 14px;background:var(--primary-soft);border:1px solid var(--primary-border);border-radius:var(--radius-md);color:var(--text-main)}
+.management-message{margin-bottom:14px}
+@media(max-width:600px){.login-card{padding:22px}.management-tabs{padding:12px}.management-form>*{min-width:100%}}
