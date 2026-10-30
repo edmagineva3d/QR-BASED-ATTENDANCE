@@ -1,43 +1,105 @@
-# QR Code Attendance System (React + TypeScript + Vite)
+ <p align="center">
+  <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&width=750&lines=Welcome+to+QR+Code+Attendance+System!;Scan+QR+Codes+and+Track+Attendance!;Manage+Students%2C+Classes+and+Sessions!;Made+with+React%2C+TypeScript+%26+Vite" alt="Typing SVG" />
+</p>
 
-A modern, standalone, client-side **QR Code Attendance System** built with **React**, **TypeScript**, and **Vite**.
+<p align="center">
+  <strong>Project:</strong> MINI CAPSTONE | | Information Assurance and Security 1<br>
+  <strong>Section:</strong> BSIT 3D
+</p>
 
-Designed specifically for school/university attendance tracking with **no backend, no API, and no server database**. All data is safely persisted in the browser's `localStorage`.
+<h1 align="center">📷 QR BASED MONITORING ATTENDANCE AT CCDI SORSOGON </h1>
 
----
+<p align="center">
+  <strong>QR Code Attendance System</strong> is a frontend-only student attendance management application built with <strong>React, TypeScript, and Vite</strong>. It allows administrators and teachers to register students, generate QR codes, scan attendance using a device camera, manage classes and attendance sessions, and generate attendance reports. The application uses browser-based localStorage to save student information, attendance records, and management data without requiring a backend server or external database.
+</p>
 
-## 🚀 Key Features
+✨ Features
 
-1. **Student Registration**
-   - Register students with **Full Name**, **Student ID**, **Course**, and **Year Level**.
-   - Validates student ID uniqueness to prevent duplicate registrations.
-   - Saves registered students directly to `localStorage`.
-   - Real-time live QR code generation preview while typing.
+👨‍🎓 Register students with full name, student ID, course, and year level
 
-2. **Real QR Code Generator**
-   - Automatically generates a real, scannable QR code for every registered student using `qrcode.react`.
-   - Encodes the student's unique ID into the QR code.
-   - Interactive **Student Attendance Pass / ID Badge** popup modal.
-   - **Download QR as PNG** button for saving to a smartphone or flash drive.
-   - **Print Pass** button with clean print styling (`@media print`).
+🔍 Validate student IDs to prevent duplicate student registrations
 
-3. **Live QR Camera Scanner**
-   - Built with `html5-qrcode` for real hardware camera scanning.
-   - **Camera Selection**: Enumerates available cameras (webcam, front camera, back/environment camera).
-   - **Start Scanner** and **Stop Scanner** buttons with animated laser viewfinder.
-   - Scans actual QR codes through your device's camera.
-   - Audio feedback via Web Audio API (success chime, duplicate alert, invalid error tone).
-   - Bonus **File Scan** tab to test QR image files directly without a webcam.
-   - **1-Click Quick-Test Bar** with registered students for fast testing without physical camera setup.
+📱 Generate real, scannable QR codes for registered students
 
-4. **Attendance Management & Verification**
-   - Immediately matches scanned QR code with registered students in `localStorage`.
-   - **Same-Day Duplicate Prevention**: Checks if the student was already marked present today (`YYYY-MM-DD`). If so, prevents duplicate entry and shows an informative alert with the previous check-in time.
-   - **Invalid/Unregistered Alert**: Alerts admin if the scanned QR code is unrecognized or not in the student registry.
-   - Displays student's Full Name, Student ID, Course, Year Level, Date, Time, and Status (`Present`).
-   - Real-time updates without refreshing the browser.
-   - **Export to CSV**: Download complete attendance reports for spreadsheets.
-   - **Clear Attendance**: Safely clear logs with a confirmation modal dialog.
+🪪 View interactive Student Attendance Pass / ID Badge
+
+📥 Download student QR codes as PNG images
+
+🖨️ Print student attendance passes with print-friendly styling
+
+📷 Scan QR codes using the device's webcam or camera
+
+🎥 Select available cameras, including front and back cameras
+
+🔦 Animated scanner laser and camera viewfinder
+
+📂 Scan QR code images directly using the File Scan feature
+
+⚡ Quick-Test Bar for testing registered students without a physical camera
+
+🔊 Audio feedback for successful, duplicate, and invalid scans
+
+✅ Automatically match scanned QR codes with registered students
+
+🚫 Prevent duplicate attendance entries within the same day or active session, depending on the attendance workflow
+
+⚠️ Display alerts for invalid or unregistered student QR codes
+
+🕒 Display student details, attendance date, time, and status
+
+📡 Show Today's Live Scan Feed with real-time student check-ins
+
+📋 View complete attendance records through the Attendance List
+
+📊 Export attendance records to CSV
+
+🧹 Clear attendance records with a confirmation dialog
+
+🔐 Teacher/Admin sign-in with role-based management controls
+
+👥 Manage teachers, administrators, classes, and sections
+
+📅 Create and manage dated attendance sessions
+
+🗓️ Set class schedules with selected days and times
+
+🎯 Select an active attendance session for QR scanning
+
+📈 Filter attendance reports by date range and section
+
+💾 Download and restore application data using JSON backups
+
+📝 Maintain a local audit trail for scans and selected management activities
+
+🌙 Light Mode and Dark Mode interface
+
+📱 Responsive layout for different screen sizes
+
+✨ Animated interface elements and interactive components
+
+🛠️ Technologies Used
+
+⚛️ React 19
+
+📘 TypeScript
+
+⚡ Vite
+
+📷 HTML5 QR Code (html5-qrcode)
+
+🔳 QR Code Generator (qrcode.react)
+
+🎨 CSS (global, responsive, and animation styles)
+
+🎭 Lucide React (lucide-react) for icons
+
+🔊 Web Audio API for scanner sound effects
+
+💾 Browser localStorage for data persistence
+
+📄 CSV export for attendance reports
+
+📦 JSON for application backup and restore
 
 ---
 
