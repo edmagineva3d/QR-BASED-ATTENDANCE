@@ -9,10 +9,11 @@ import {
   Clock,
   Sun,
   Moon,
+  Settings,
 } from 'lucide-react';
 import { sounds } from '../utils/sound';
 
-export type NavTab = 'scanner' | 'attendance' | 'students' | 'register';
+export type NavTab = 'scanner' | 'attendance' | 'students' | 'register' | 'management';
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -138,6 +139,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           <UserPlus size={18} />
           <span>Register Student</span>
+        </button>
+        <button type="button" className={`nav-tab-item ${activeTab === 'management' ? 'active' : ''}`} onClick={() => onTabChange('management')}>
+          <Settings size={18} />
+          <span>Management</span>
         </button>
       </nav>
     </header>
