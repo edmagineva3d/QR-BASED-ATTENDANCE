@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import type { FormEvent } from 'react';
 import type { Student, AttendanceRecord, ScanNotice } from './types';
 import {
   getStoredStudents,
@@ -18,11 +19,18 @@ import { AttendanceList } from './components/AttendanceList';
 import { StudentQRModal } from './components/StudentQRModal';
 import { ConfirmModal } from './components/ConfirmModal';
 import { NoticeBanner } from './components/NoticeBanner';
+import { ManagementPanel } from './components/ManagementPanel';
 import { Clock, ShieldCheck, RotateCcw, CheckCircle2, Laptop, Tablet, Smartphone } from 'lucide-react';
 import './App.css';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('scanner');
+  const [currentUser, setCurrentUser] = useState<{ username: string; role: 'Admin' | 'Teacher' } | null>(() => {
+    try { const raw = localStorage.getItem('qr_current_user'); return raw ? JSON.parse(raw) : null; } catch { return null; }
+  });
+  const [loginName, setLoginName] = useState('admin');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const saved = localStorage.getItem('qr-attendance-theme');
     return saved === 'dark' ? 'dark' : 'light';
@@ -87,12 +95,18 @@ export function App() {
         return;
       }
 
-      // 2. Duplicate Attendance Check (Same student on the same date)
+      // 2. Duplicate check is per active session when one is selected.
       const todayStr = getTodayDateString();
-      const existingEntry = attendanceRecords.find(
-        (record) =>
-          record.studentId.trim().toLowerCase() === matchedStudent.studentId.trim().toLowerCase() &&
-          record.date === todayStr
+      let activeSession: { id: string; classId: string; start: string; label: string } | null = null;
+      try {
+        const sessions = JSON.parse(localStorage.getItem('qr_sessions_v1') || '[]') as Array<{ id: string; classId: string; date: string; start: string; label: string }>;
+        const activeId = localStorage.getItem('qr_active_session');
+        activeSession = sessions.find(session => session.id === activeId && session.date === todayStr) || null;
+      } catch { activeSession = null; }
+      const existingEntry = attendanceRecords.find((record) =>
+        record.studentId.trim().toLowerCase() === matchedStudent.studentId.trim().toLowerCase() &&
+        record.date === todayStr &&
+        (activeSession ? record.sessionId === activeSession.id : !record.sessionId)
       );
 
       if (existingEntry) {
@@ -109,6 +123,9 @@ export function App() {
       }
 
       // 3. Valid Scan -> Record Attendance
+      const currentTime = new Date();
+      const currentClock = `${String(currentTime.getHours()).padStart(2, '0')}:${String(currentTime.getMinutes()).padStart(2, '0')}`;
+      const isLate = activeSession ? currentClock > activeSession.start : false;
       const newRecord: AttendanceRecord = {
         id: `rec-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
         studentId: matchedStudent.studentId,
@@ -118,22 +135,28 @@ export function App() {
         date: todayStr,
         time: formatTime(),
         timestamp: Date.now(),
-        status: 'Present',
+        status: isLate ? 'Late' : 'Present',
+        ...(activeSession ? { classId: activeSession.classId, sessionId: activeSession.id, sessionLabel: activeSession.label } : {}),
       };
 
       setAttendanceRecords((prev) => [newRecord, ...prev]);
+      try {
+        const audit = JSON.parse(localStorage.getItem('qr_audit_v1') || '[]');
+        audit.unshift({ id: `audit-${Date.now()}`, user: currentUser?.username || 'unknown', action: `Recorded ${newRecord.status} attendance for ${matchedStudent.studentId}`, at: new Date().toLocaleString() });
+        localStorage.setItem('qr_audit_v1', JSON.stringify(audit));
+      } catch { /* keep attendance working even if audit storage is unavailable */ }
       sounds.playSuccess();
 
       setScanNotice({
         id: `notice-${Date.now()}`,
         type: 'success',
         title: 'Attendance Recorded Successfully!',
-        message: `${matchedStudent.fullName} has been verified and marked as Present for today.`,
+        message: `${matchedStudent.fullName} has been verified and marked as ${newRecord.status}${activeSession ? ` for ${activeSession.label}` : ' for today'}.`,
         student: matchedStudent,
         timestamp: Date.now(),
       });
     },
-    [students, attendanceRecords]
+    [students, attendanceRecords, currentUser]
   );
 
   // Register a new student
@@ -154,6 +177,11 @@ export function App() {
   const handleConfirmDeleteStudent = () => {
     if (studentToDelete) {
       setStudents((prev) => prev.filter((s) => s.id !== studentToDelete.id));
+      try {
+        const audit = JSON.parse(localStorage.getItem('qr_audit_v1') || '[]');
+        audit.unshift({ id: `audit-${Date.now()}`, user: currentUser?.username || 'unknown', action: `Deleted student ${studentToDelete.studentId}`, at: new Date().toLocaleString() });
+        localStorage.setItem('qr_audit_v1', JSON.stringify(audit));
+      } catch { /* do not block deletion */ }
       setStudentToDelete(null);
     }
   };
@@ -162,6 +190,11 @@ export function App() {
   const handleConfirmClearAttendance = () => {
     setAttendanceRecords([]);
     clearStoredAttendance();
+    try {
+      const audit = JSON.parse(localStorage.getItem('qr_audit_v1') || '[]');
+      audit.unshift({ id: `audit-${Date.now()}`, user: currentUser?.username || 'unknown', action: 'Cleared all attendance records', at: new Date().toLocaleString() });
+      localStorage.setItem('qr_audit_v1', JSON.stringify(audit));
+    } catch { /* do not block clear action */ }
     setIsClearModalOpen(false);
     setScanNotice({
       id: `notice-${Date.now()}`,
@@ -187,6 +220,36 @@ export function App() {
 
   const todayStr = getTodayDateString();
   const todayScans = attendanceRecords.filter((r) => r.date === todayStr);
+
+  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const accounts = [
+      { username: 'admin', password: 'admin123', role: 'Admin' as const },
+      { username: 'teacher', password: 'teacher123', role: 'Teacher' as const },
+    ];
+    const found = accounts.find(account => account.username === loginName.trim().toLowerCase() && account.password === loginPassword);
+    if (!found) { setLoginError('Incorrect username or password. Please try again.'); return; }
+    const user = { username: found.username, role: found.role };
+    localStorage.setItem('qr_current_user', JSON.stringify(user));
+    setCurrentUser(user); setLoginError('');
+  };
+  const handleLogout = () => { localStorage.removeItem('qr_current_user'); setCurrentUser(null); setActiveTab('scanner'); };
+
+  if (!currentUser) return (
+    <div className="login-screen">
+      <form className="login-card" onSubmit={handleLogin}>
+        <div className="brand-logo-circle"><Clock size={24}/></div>
+        <h1>QR Code Attendance System</h1>
+        <p>Sign in to continue to the attendance dashboard.</p>
+        <label>Username<input className="form-input" value={loginName} onChange={e => setLoginName(e.target.value)} autoComplete="username" required/></label>
+        <label>Password<input className="form-input" type="password" value={loginPassword} onChange={e => setLoginPassword(e.target.value)} autoComplete="current-password" required/></label>
+        {loginError && <p className="login-error">{loginError}</p>}
+        <button className="btn btn-primary" type="submit">Sign in</button>
+        <div className="login-demo"><b>Demo accounts</b><span>Admin: admin / admin123</span><span>Teacher: teacher / teacher123</span></div>
+        <small>Prototype sign-in only. Do not use real passwords or sensitive records.</small>
+      </form>
+    </div>
+  );
 
   return (
     <div className={`preview-stage preview-${deviceMode}`} data-theme={theme}>
@@ -331,6 +394,24 @@ export function App() {
             <StudentRegistration
               onRegisterStudent={handleRegisterStudent}
               onOpenQRModal={(st) => setSelectedStudentForQR(st)}
+            />
+          </div>
+        )}
+
+        {activeTab === 'management' && (
+          <div className="tab-pane">
+            <ManagementPanel
+              students={students}
+              records={attendanceRecords}
+              user={currentUser}
+              onLogout={handleLogout}
+              onAudit={(action) => {
+                try {
+                  const audit = JSON.parse(localStorage.getItem('qr_audit_v1') || '[]');
+                  audit.unshift({ id: `audit-${Date.now()}`, user: currentUser.username, action, at: new Date().toLocaleString() });
+                  localStorage.setItem('qr_audit_v1', JSON.stringify(audit));
+                } catch { /* audit is best-effort in local-only mode */ }
+              }}
             />
           </div>
         )}
