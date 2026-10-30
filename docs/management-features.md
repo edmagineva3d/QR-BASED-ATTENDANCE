@@ -26,3 +26,7 @@ Choose a date range and section to view attendance records, then export the filt
 ## 7. Backup And Restore
 
 Download student, attendance, class, session, schedule, and audit data as a JSON backup. Restore a valid backup file in the same browser and refresh to reload the student and attendance lists.
+
+## 8. Audit Trail
+
+The system records attendance scans and selected management actions with the demo username and time. The log is stored in LocalStorage and is not tamper-proof.

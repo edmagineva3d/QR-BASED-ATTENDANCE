@@ -143,3 +143,28 @@ qr-code-attendance-system/
         ├── date.ts              # Date & time formatting utilities
         └── sound.ts             # Web Audio API sound generator (chimes & alerts)
 ```
+
+
+## Added management features
+
+The updated project adds a local-only management area while keeping the existing QR scanner, student directory, registration, attendance list, theme, and device preview.
+
+- **Teacher/Admin sign-in:** demo accounts are `admin / admin123` and `teacher / teacher123`.
+- **User roles:** the management area identifies the signed-in role. Admin-only class creation and deletion controls are shown for the Admin account.
+- **Class and section management:** add and remove class/section entries.
+- **Attendance sessions:** create dated sessions, choose the active session for scanning, and prevent duplicate scans per student per active session.
+- **Schedule management:** save class day and time schedules.
+- **Reports:** filter attendance by date range and section, then export CSV. A day, week, or month can be selected by setting the date range.
+- **Backup and restore:** download a JSON backup and restore it in the same browser.
+- **Audit trail:** record scans, selected management actions, and backup/restore activity.
+
+### Demo sign-in
+
+| Role | Username | Password |
+|---|---|---|
+| Admin | `admin` | `admin123` |
+| Teacher | `teacher` | `teacher123` |
+
+### Important project limitation
+
+This is still a **frontend-only prototype**. Data is stored in the browser's LocalStorage, so it is not shared across computers or browser profiles. Demo credentials are visible in the frontend code and are not secure authentication. The audit trail is also stored locally and can be edited by someone with browser access. Do not use real passwords or sensitive student information. For actual school deployment, the panel should be informed that a backend, shared database, secure authentication, and protected audit logs are still needed.

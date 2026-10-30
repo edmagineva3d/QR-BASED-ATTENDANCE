@@ -405,13 +405,7 @@ export function App() {
               records={attendanceRecords}
               user={currentUser}
               onLogout={handleLogout}
-              onAudit={(action) => {
-                try {
-                  const audit = JSON.parse(localStorage.getItem('qr_audit_v1') || '[]');
-                  audit.unshift({ id: `audit-${Date.now()}`, user: currentUser.username, action, at: new Date().toLocaleString() });
-                  localStorage.setItem('qr_audit_v1', JSON.stringify(audit));
-                } catch { /* audit is best-effort in local-only mode */ }
-              }}
+              onAudit={(action) => console.info('Management activity:', action)}
             />
           </div>
         )}
