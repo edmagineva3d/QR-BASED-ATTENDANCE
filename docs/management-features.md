@@ -22,3 +22,7 @@ Save the class day, start time, and end time. The schedule list is stored in the
 ## 6. Attendance Reports
 
 Choose a date range and section to view attendance records, then export the filtered records as CSV.
+
+## 7. Backup And Restore
+
+Download student, attendance, class, session, schedule, and audit data as a JSON backup. Restore a valid backup file in the same browser and refresh to reload the student and attendance lists.
