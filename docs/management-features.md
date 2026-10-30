@@ -14,3 +14,7 @@ Class and section entries are saved locally and can be used when creating attend
 ## 4. Attendance Sessions
 
 Create a dated session and select it as the active session. Scans are separated by session so the same student can attend more than one session in a day.
+
+## 5. Class Schedules
+
+Save the class day, start time, and end time. The schedule list is stored in the browser.
