@@ -17,6 +17,10 @@ export interface AttendanceRecord {
   time: string; // e.g. "09:30:15 AM"
   timestamp: number;
   status: 'Present' | 'Late';
+  classId?: string;
+  classSection?: string;
+  sessionId?: string;
+  sessionLabel?: string;
 }
 
 export type ScanNoticeType = 'success' | 'warning' | 'error' | 'info';
