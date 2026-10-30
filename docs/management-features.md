@@ -10,3 +10,7 @@ The Management area displays the signed-in role. Admin-only controls are used fo
 ## 3. Class And Section Setup
 
 Class and section entries are saved locally and can be used when creating attendance sessions and schedules.
+
+## 4. Attendance Sessions
+
+Create a dated session and select it as the active session. Scans are separated by session so the same student can attend more than one session in a day.
