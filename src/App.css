@@ -413,6 +413,7 @@
   color: var(--text-muted);
 }
 
+
 /* Scanner Card Styles */
 .scanner-header {
   display: flex;
@@ -488,6 +489,56 @@
 .scanner-alert-inline {
   margin-bottom: 1.25rem;
 }
+
+
+/* =====================================
+   DARK MODE - SCANNER CARD
+===================================== */
+
+:root[data-theme="dark"] .scanner-tabs {
+  background-color: #111d30;
+}
+
+:root[data-theme="dark"] .scanner-tab-btn {
+  background-color: transparent;
+  color: #a9bad0;
+}
+
+:root[data-theme="dark"] .scanner-tab-btn:hover {
+  background-color: #26364c;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .scanner-tab-btn.active {
+  background-color: #26364c !important;
+  color: #a5b4fc !important;
+  box-shadow: var(--shadow-sm);
+}
+
+:root[data-theme="dark"] .scanner-tab-btn svg {
+  color: inherit;
+}
+
+:root[data-theme="dark"] .scanner-controls-bar {
+  background-color: #202e43;
+  border-color: #384961;
+}
+
+:root[data-theme="dark"] .control-label {
+  color: #a9bad0;
+}
+
+:root[data-theme="dark"] .camera-select {
+  background-color: #26364c;
+  color: #dbe5f2;
+  border-color: #52647d;
+}
+
+:root[data-theme="dark"] .camera-select option {
+  background-color: #202e43;
+  color: #dbe5f2;
+}
+
 
 /* Viewport */
 .scanner-viewport-wrapper {
@@ -659,6 +710,7 @@
   backdrop-filter: blur(4px);
 }
 
+
 /* File Upload Scan */
 .scanner-file-box {
   padding: 1.5rem 0;
@@ -682,9 +734,18 @@
   background-color: var(--primary-soft);
 }
 
+.upload-dropzone h3 {
+  color: var(--text-main);
+}
+
+.upload-dropzone p {
+  color: var(--text-muted);
+}
+
+
 /* Quick Test Section */
 .quick-test-section {
-  background-color: #f8fafc;
+  background-color: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
@@ -730,7 +791,7 @@
   align-items: center;
   gap: 0.45rem;
   padding: 0.4rem 0.75rem;
-  background-color: white;
+  background-color: var(--input-bg, var(--card-bg));
   border: 1px solid var(--border);
   border-radius: 9999px;
   font-size: 0.82rem;
@@ -747,7 +808,8 @@
 }
 
 .chip-id {
-  background-color: #e2e8f0;
+  background-color: var(--border);
+  color: var(--text-main);
   font-size: 0.75rem;
   padding: 1px 5px;
   border-radius: 4px;
@@ -755,7 +817,7 @@
 
 .btn-outline-chip.chip-invalid {
   border-color: var(--error-border);
-  color: #991b1b;
+  color: var(--error);
 }
 
 .btn-outline-chip.chip-invalid:hover {
@@ -765,7 +827,7 @@
 
 .btn-outline-chip.chip-invalid .chip-id {
   background-color: var(--error-border);
-  color: #7f1d1d;
+  color: var(--error);
 }
 
 .last-scanned-footer {
@@ -786,6 +848,88 @@
   color: var(--primary);
   font-weight: 600;
 }
+
+
+/* =====================================
+   DARK MODE - FILE UPLOAD & QUICK TEST
+===================================== */
+
+:root[data-theme="dark"] .scanner-file-box {
+  color: #dbe5f2;
+}
+
+:root[data-theme="dark"] .upload-dropzone {
+  background-color: #202e43 !important;
+  border: 2px dashed #52647d !important;
+  color: #dbe5f2;
+}
+
+:root[data-theme="dark"] .upload-dropzone:hover {
+  background-color: #26364c !important;
+  border-color: var(--primary) !important;
+}
+
+:root[data-theme="dark"] .upload-dropzone h3 {
+  color: #dbe5f2 !important;
+}
+
+:root[data-theme="dark"] .upload-dropzone p {
+  color: #a9bad0 !important;
+}
+
+:root[data-theme="dark"] .upload-dropzone .text-primary {
+  color: #818cf8 !important;
+}
+
+:root[data-theme="dark"] .quick-test-section {
+  background-color: var(--card-bg);
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] .quick-test-title,
+:root[data-theme="dark"] .btn-outline-chip,
+:root[data-theme="dark"] .chip-id {
+  color: #dbe5f2;
+}
+
+:root[data-theme="dark"] .quick-test-desc,
+:root[data-theme="dark"] .last-scan-label {
+  color: #a9bad0;
+}
+
+:root[data-theme="dark"] .quick-test-badge {
+  background-color: #303e59;
+  color: #a5b4fc;
+}
+
+:root[data-theme="dark"] .btn-outline-chip {
+  background-color: #26364c;
+  border-color: #52647d;
+}
+
+:root[data-theme="dark"] .btn-outline-chip:hover {
+  background-color: #303e59;
+  border-color: var(--primary);
+}
+
+:root[data-theme="dark"] .chip-id {
+  background-color: #384961;
+}
+
+:root[data-theme="dark"] .btn-outline-chip.chip-invalid {
+  color: var(--error);
+  border-color: var(--error-border);
+}
+
+:root[data-theme="dark"] .btn-outline-chip.chip-invalid .chip-id {
+  background-color: #49313b;
+  color: var(--error);
+}
+
+:root[data-theme="dark"] .last-scanned-footer {
+  border-top-color: var(--border);
+}
+
 
 /* Recent Scans Mini List */
 .recent-scans-list {
@@ -1017,9 +1161,15 @@
 }
 
 .view-toggle-btn.active {
-  background-color: white;
+  background-color: var(--bg-card);
   color: var(--text-main);
   box-shadow: var(--shadow-sm);
+}
+
+/* Dark Mode */
+:root[data-theme="dark"] .view-toggle-btn.active {
+  background-color: #202e43;
+  color: #dbe5f2;
 }
 
 /* Student Cards Grid */
@@ -1029,8 +1179,10 @@
   gap: 1.25rem;
 }
 
+
 .student-card {
-  background-color: white;
+  background-color: var(--card-bg);
+  color: var(--text-main);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 1.15rem;
@@ -1043,7 +1195,7 @@
 .student-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
-  border-color: #cbd5e1;
+  border-color: var(--primary);
 }
 
 .student-card-top {
@@ -1130,8 +1282,8 @@
 }
 
 .badge-year {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: var(--primary-soft);
+  color: var(--text-main);
   font-size: 0.75rem;
   font-weight: 600;
   padding: 2px 7px;
@@ -1152,6 +1304,7 @@
   padding-top: 0.75rem;
   border-top: 1px solid var(--border-subtle);
 }
+
 
 /* Attendance Header & Stats */
 .attendance-header-actions {
@@ -1249,16 +1402,18 @@
   border-radius: var(--radius-md);
 }
 
+
 .custom-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
   font-size: 0.88rem;
+  background-color: var(--bg-card);
 }
 
 .custom-table th {
-  background-color: #f8fafc;
-  color: #475569;
+  background-color: var(--bg-main);
+  color: var(--text-main);
   font-weight: 700;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border);
@@ -1269,15 +1424,17 @@
   padding: 0.85rem 1rem;
   border-bottom: 1px solid var(--border);
   color: var(--text-main);
+  background-color: var(--bg-card);
 }
 
 .custom-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-.custom-table tbody tr:hover {
-  background-color: #f8fafc;
+.custom-table tbody tr:hover td {
+  background-color: var(--bg-input);
 }
+
 
 .row-today {
   background-color: rgba(79, 70, 229, 0.02);
@@ -2012,25 +2169,30 @@
   color: #e5eaf3;
 }
 
+
 :root[data-theme="dark"] .modal-footer,
 :root[data-theme="dark"] .scanner-controls-bar,
 :root[data-theme="dark"] .stat-card,
+:root[data-theme="dark"] .custom-table,
 :root[data-theme="dark"] .custom-table th,
-:root[data-theme="dark"] .custom-table tbody tr:hover,
+:root[data-theme="dark"] .custom-table td,
+:root[data-theme="dark"] .custom-table tbody tr:hover td,
 :root[data-theme="dark"] .btn-secondary,
 :root[data-theme="dark"] .scanner-tabs,
 :root[data-theme="dark"] .badge-year-xs,
 :root[data-theme="dark"] .footer-badge {
-  background-color: #202e43;
-  color: #dbe5f2;
+  background-color: var(--bg-input);
+  color: var(--text-main);
 }
 
 :root[data-theme="dark"] .modal-message,
 :root[data-theme="dark"] .custom-table th,
+:root[data-theme="dark"] .custom-table td,
 :root[data-theme="dark"] .badge-success,
 :root[data-theme="dark"] .id-verified-badge {
-  color: #dbe5f2;
+  color: var(--text-main);
 }
+
 
 :root[data-theme="dark"] .btn-secondary:hover:not(:disabled) {
   background-color: #334155;
