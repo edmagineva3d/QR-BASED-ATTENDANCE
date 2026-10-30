@@ -932,6 +932,8 @@
 
 
 /* Recent Scans Mini List */
+
+/* Recent Scans Mini List */
 .recent-scans-list {
   display: flex;
   flex-direction: column;
@@ -991,6 +993,31 @@
   border-radius: 9999px;
   color: var(--text-muted);
   font-variant-numeric: tabular-nums;
+}
+
+/* Dark Mode - Recent Scans */
+:root[data-theme="dark"] .recent-scan-item {
+  background-color: #202f45 !important;
+  border-color: #3a4c65 !important;
+}
+
+:root[data-theme="dark"] .recent-student-name {
+  color: #f8fafc !important;
+}
+
+:root[data-theme="dark"] .recent-student-meta {
+  color: #b5c3d6 !important;
+}
+
+:root[data-theme="dark"] .recent-student-meta code {
+  background-color: #33465f !important;
+  color: #bfdbfe !important;
+}
+
+:root[data-theme="dark"] .time-badge {
+  background-color: #263b55 !important;
+  border-color: #526780 !important;
+  color: #dbeafe !important;
 }
 
 /* Registration Grid */
@@ -2328,3 +2355,4 @@
 .management-note,.management-message{padding:12px 14px;background:var(--primary-soft);border:1px solid var(--primary-border);border-radius:var(--radius-md);color:var(--text-main)}
 .management-message{margin-bottom:14px}
 @media(max-width:600px){.login-card{padding:22px}.management-tabs{padding:12px}.management-form>*{min-width:100%}}
+
